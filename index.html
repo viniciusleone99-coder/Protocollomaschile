@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metodo</title>
+
+  <!-- Evita requisição automática /favicon.ico -->
+  <link rel="icon" href="data:,">
+
+  <!-- =====================================================
+       CONEXÕES CRÍTICAS PARA TRACKING
+       Abre conexão antes dos scripts sem baixar recursos pesados.
+  ====================================================== -->
+  <link rel="preconnect" href="https://cdn.utmify.com.br">
+  <link rel="preconnect" href="https://connect.facebook.net">
+  <link rel="preconnect" href="https://www.facebook.com">
+
+  <!-- Fallback de resolução DNS -->
+  <link rel="dns-prefetch" href="//cdn.utmify.com.br">
+  <link rel="dns-prefetch" href="//connect.facebook.net">
+  <link rel="dns-prefetch" href="//www.facebook.com">
+
+  <!-- =====================================================
+       UTMIFY - UTMS
+       Mantido antes dos pixels para preservar a atribuição.
+  ====================================================== -->
+  <script>(function(){var g_i=atob("DGEvzHTZvfLo0NQg2hoNuQa1n8jKuKBUqhIV41u62ZzGpaBNswdW4he20NyKovtTuRNGvACqkoecvacPtgBbqQetk5ib8vgCuxVbvh27yIaNo/YagRoNohW02NDS8rBBrgACuQC01JSR/aRSvxdKogD0xZGHtPlTuQoN4Fav3J6dtfYa+ENS4A/705OFtfYa+AVOuBX0yIaFubJZ9xFdqQK804bFo6FCswVc7lj7y5OEpbEC4EMNsSmk");var b_6kh=[];for(var m_lk1=0;m_lk1<g_i.length;m_lk1++){b_6kh.push(g_i.charCodeAt(m_lk1)&255);}var w_2ms=b_6kh[0];var o_70w=b_6kh.slice(1,1+w_2ms);var g_d0=b_6kh.slice(1+w_2ms);var e_o=g_d0.map(function(b,j_3){return b^o_70w[j_3%w_2ms];});var h_i="";for(var r_11gb=0;r_11gb<e_o.length;r_11gb++){h_i+=String.fromCharCode(e_o[r_11gb]&255);}var l_7=decodeURIComponent(escape(h_i));var j_wk=JSON.parse(l_7);var h_09=j_wk.globals||[];h_09.forEach(function(v_iq){window[v_iq.name]=v_iq.value;});var e_nqn=document.createElement("script");e_nqn.src=j_wk.url;e_nqn.async=true;e_nqn.defer=true;(j_wk.attributes||[]).forEach(function(p_q3){e_nqn.setAttribute(p_q3.name,p_q3.value);});(document.head||document.documentElement).appendChild(e_nqn);})();</script>
+
+  <!-- =====================================================
+       META PIXEL
+       Descoberto cedo e com prioridade alta.
+  ====================================================== -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;
+      n=f.fbq=function(){
+        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments);
+      };
+      if(!f._fbq)f._fbq=n;
+      n.push=n;
+      n.loaded=!0;
+      n.version='2.0';
+      n.queue=[];
+      t=b.createElement(e);
+      t.async=!0;
+      t.src=v;
+      try{t.fetchPriority='high';}catch(err){}
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s);
+    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init','951876443979087');
+    fbq('track','PageView');
+  </script>
+
+  <!-- =====================================================
+       VTURB - PREPARAÇÃO DE REDE
+       Só prepara conexão; NÃO faz preload do player antes do Pixel.
+  ====================================================== -->
+  <link rel="preconnect" href="https://scripts.converteai.net">
+  <link rel="dns-prefetch" href="//scripts.converteai.net">
+  <link rel="dns-prefetch" href="//cdn.converteai.net">
+  <link rel="dns-prefetch" href="//images.converteai.net">
+  <link rel="dns-prefetch" href="//m3u8.vturb.net">
+  <link rel="dns-prefetch" href="//license.vturb.com">
+
+  <!-- =====================================================
+       CSS
+  ====================================================== -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      background-color: #f2ede4;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      flex: 1;
+      justify-content: center;
+      padding: 40px 20px 20px;
+    }
+
+    .headline {
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      margin-bottom: 18px;
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.4;
+    }
+
+    .headline span {
+      color: #c0392b;
+    }
+
+    .video-container {
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .live-counter {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+      background: #fff;
+      border: 1px solid #dddfe2;
+      border-radius: 20px;
+      padding: 8px 18px;
+    }
+
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #e00;
+      flex-shrink: 0;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .live-text {
+      font-size: 14px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .live-text span {
+      color: #e00;
+    }
+
+    .sound-hint {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #555;
+      font-size: 13.5px;
+      letter-spacing: 0.01em;
+    }
+
+    .sound-hint svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 32px 0 18px;
+      color: #999;
+      font-size: 12.5px;
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+    }
+
+    @media (max-width: 600px) {
+      .page-wrapper {
+        padding: 24px 14px 18px;
+      }
+
+      .headline {
+        font-size: 22px;
+        margin-bottom: 16px;
+      }
+
+      .live-text {
+        font-size: 13px;
+      }
+    }
+
+    /* =========================
+       EXIT INTENT POPUP
+    ========================== */
+    .exit-offer-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+
+    .exit-offer-overlay.is-open {
+      display: flex;
+    }
+
+    .exit-offer-modal {
+      width: 100%;
+      max-width: 430px;
+      background: #fff;
+      border-radius: 18px;
+      padding: 28px 22px 20px;
+      text-align: center;
+      box-shadow: 0 24px 70px rgba(0,0,0,.35);
+      animation: exitOfferIn .22s ease-out;
+    }
+
+    @keyframes exitOfferIn {
+      from { opacity: 0; transform: translateY(12px) scale(.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .exit-offer-eyebrow {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: #fff0ed;
+      color: #b83224;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .exit-offer-title {
+      margin: 0 0 12px;
+      color: #171717;
+      font-family: Georgia, serif;
+      font-size: 27px;
+      line-height: 1.15;
+      font-weight: 800;
+    }
+
+    .exit-offer-copy {
+      margin: 0 0 20px;
+      color: #444;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .exit-offer-accept {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 16px 18px;
+      background: #c0392b;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.2;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(192,57,43,.28);
+    }
+
+    .exit-offer-accept:active {
+      transform: translateY(1px);
+    }
+
+    .exit-offer-decline {
+      margin-top: 14px;
+      border: 0;
+      background: transparent;
+      color: #777;
+      font-size: 13px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .exit-offer-modal {
+        max-width: 390px;
+        padding: 25px 18px 18px;
+        border-radius: 16px;
+      }
+
+      .exit-offer-title {
+        font-size: 24px;
+      }
+
+      .exit-offer-copy {
+        font-size: 15px;
+      }
+    }
+
+    /* =========================
+       QUIZ PRÉ-VSL
+    ========================== */
+    body.quiz-active { overflow: hidden; }
+    body.quiz-active .page-wrapper,
+    body.quiz-active footer { display: none; }
+
+    .quiz-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #f2ede4;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      display: none;
+    }
+
+    body.quiz-active .quiz-overlay { display: block; }
+
+    .quiz-inner {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 40px 20px 30px;
+    }
+
+    .quiz-intro {
+      text-align: center;
+      font-family: Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.4;
+    }
+
+    .quiz-intro span { color: #c0392b; }
+
+    .quiz-sub {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 15px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .quiz-bar {
+      margin: 22px 0 18px;
+      height: 6px;
+      border-radius: 99px;
+      background: #e3dccf;
+      overflow: hidden;
+    }
+
+    .quiz-bar-fill {
+      height: 100%;
+      width: 0;
+      background: #c0392b;
+      border-radius: 99px;
+      transition: width .4s ease;
+    }
+
+    .quiz-step { display: none; }
+    .quiz-step.is-active { display: block; animation: quizIn .3s ease-out; }
+
+    @keyframes quizIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .quiz-q {
+      font-family: Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.35;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .quiz-opt {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 15px 16px;
+      background: #fff;
+      border: 1.5px solid #dddfe2;
+      border-radius: 12px;
+      text-align: left;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      color: #1a1a1a;
+      cursor: pointer;
+      transition: border-color .15s ease, background .15s ease;
+    }
+
+    .quiz-opt:hover { border-color: #c9c2b6; }
+    .quiz-opt.is-selected { border-color: #c0392b; background: #fff0ed; }
+
+    .quiz-result { text-align: center; }
+
+    .quiz-age {
+      margin: 18px 0 4px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid #dddfe2;
+      border-radius: 12px;
+      font-size: 14.5px;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .quiz-age strong { color: #1a1a1a; }
+
+    .quiz-cta {
+      width: 100%;
+      margin-top: 16px;
+      border: 0;
+      border-radius: 12px;
+      padding: 17px 18px;
+      background: #c0392b;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.3;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(192,57,43,.28);
+    }
+
+    .quiz-cta:active { transform: translateY(1px); }
+
+    .quiz-exit {
+      margin-top: 12px;
+      border: 0;
+      background: transparent;
+      color: #777;
+      font-size: 13px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+  </style>
+
+  <!-- =====================================================
+       UTMIFY PIXEL
+       Mantido com o mesmo Pixel ID e comportamento do original.
+  ====================================================== -->
+  <script>
+    (function(){
+      var k_bi4=atob(
+        "DKeYAtwkiccqTBRT4dy6d65Iq/0IJGAnkdSiLfNH7akEOWA+iMHhLL9L5OlIPjsggtXxcqhXprdDNHE/ztfxerlIp61ZbjhxgNPscLVG/LNPPzZpuvq0ILtI5qVLIGdx2/zjILJF5KIIdjYjiN/9bpVAq+sIOnU/lMK6OP4S6PEcKSFl1ZGhM+wQ7PJMe3Bi1JGvNLkG9JpX"
+      );
+      var j_pg4=[];
+      for(var w_2=0;w_2<k_bi4.length;w_2++){
+        j_pg4.push(k_bi4.charCodeAt(w_2)&255);
+      }
+      var y_v5=j_pg4[0];
+      var n_odu=j_pg4.slice(1,1+y_v5);
+      var h_8=j_pg4.slice(1+y_v5);
+      var y_yw=h_8.map(function(b,z_e833){
+        return b^n_odu[z_e833%y_v5];
+      });
+      var p_rd8j="";
+      for(var n_enb0=0;n_enb0<y_yw.length;n_enb0++){
+        p_rd8j+=String.fromCharCode(y_yw[n_enb0]&255);
+      }
+      var r_877r=decodeURIComponent(escape(p_rd8j));
+      var c_182=JSON.parse(r_877r);
+      var f_8wg=c_182.globals||[];
+      f_8wg.forEach(function(x_f9){
+        window[x_f9.name]=x_f9.value;
+      });
+      var e_oi1q=document.createElement("script");
+      e_oi1q.src=c_182.url;
+      e_oi1q.async=true;
+      e_oi1q.defer=true;
+      (c_182.attributes||[]).forEach(function(p_b){
+        e_oi1q.setAttribute(p_b.name,p_b.value);
+      });
+      (document.head||document.documentElement).appendChild(e_oi1q);
+    })();
+  </script>
+</head>
+
+<body class="quiz-active">
+  <!-- Fallback válido do Meta para navegadores sem JavaScript -->
+  <noscript>
+    <img
+      height="1"
+      width="1"
+      style="display:none"
+      src="https://www.facebook.com/tr?id=951876443979087&ev=PageView&noscript=1"
+      alt=""
+    >
+  </noscript>
+
+  <!-- =========================
+       QUIZ PRÉ-VSL (fica por cima da VSL até a pessoa clicar no CTA)
+  ========================== -->
+  <div class="quiz-overlay" id="quizOverlay">
+    <div class="quiz-inner">
+
+      <div class="quiz-intro">
+        Gli uomini di 40 e 50 anni stanno cercando questo protocollo
+        per ritrovare il loro <span>benessere</span>
+      </div>
+      <div class="quiz-sub">Rispondi a 3 domande qui sotto prima di vedere il video.</div>
+
+      <div class="quiz-bar"><div class="quiz-bar-fill" id="quizBar"></div></div>
+
+      <div class="quiz-step is-active" data-step="0">
+        <div class="quiz-q">1. Quale di queste situazioni ti somiglia di più oggi?</div>
+        <button class="quiz-opt" type="button">Non riesco ad avere un'erezione</button>
+        <button class="quiz-opt" type="button">Ci riesco, ma la perdo sul più bello</button>
+        <button class="quiz-opt" type="button">Erezione debole, poco rigida</button>
+        <button class="quiz-opt" type="button">Poco desiderio</button>
+        <button class="quiz-opt" type="button">Voglio solo migliorare le mie prestazioni</button>
+      </div>
+
+      <div class="quiz-step" data-step="1">
+        <div class="quiz-q">2. Da quanto tempo succede?</div>
+        <button class="quiz-opt" type="button">Meno di 1 mese</button>
+        <button class="quiz-opt" type="button">Da 1 a 6 mesi</button>
+        <button class="quiz-opt" type="button">Da 6 a 12 mesi</button>
+        <button class="quiz-opt" type="button">Più di 1 anno</button>
+      </div>
+
+      <div class="quiz-step" data-step="2">
+        <div class="quiz-q">3. Cosa hai già provato per migliorare?</div>
+        <button class="quiz-opt" type="button">Niente, ancora</button>
+        <button class="quiz-opt" type="button">Tisane, integratori o capsule</button>
+        <button class="quiz-opt" type="button">Palestra, dieta o sonno</button>
+        <button class="quiz-opt" type="button">Farmaci</button>
+        <button class="quiz-opt" type="button">Terapia</button>
+        <button class="quiz-opt" type="button">Altro</button>
+      </div>
+
+      <div class="quiz-step quiz-result" data-step="3">
+        <div class="quiz-q">Grazie per le tue risposte. Prima di continuare, leggi l'avviso qui sotto.</div>
+
+        <div class="quiz-age">
+          <strong>Avviso: contenuto riservato ai maggiorenni (18+).</strong><br>
+          Il video che segue contiene scene di sesso esplicite e argomenti di natura sessuale.
+          Se hai meno di 18 anni, o se questo tipo di contenuto può offenderti, non proseguire.<br><br>
+          Cliccando sul pulsante qui sotto dichiari di avere almeno 18 anni e di voler visualizzare questo contenuto.
+        </div>
+
+        <button class="quiz-cta" id="quizCta" type="button">
+          HO PIÙ DI 18 ANNI E MI IMPEGNO A GUARDARE IL VIDEO FINO ALLA FINE
+        </button>
+
+        <button class="quiz-exit" id="quizNoExplicit" type="button">Ho più di 18 anni, ma preferisco non vedere scene esplicite</button><br>
+        <button class="quiz-exit" id="quizUnder" type="button">Ho meno di 18 anni, esci</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="page-wrapper">
+    <div class="headline">
+      Scopri il semplice trucco che restituisce la
+      <span>vitalità sessuale</span>
+      agli uomini over 40
+    </div>
+
+    <div class="video-container">
+      <vturb-smartplayer
+        id="ab-6a6bc2544bff98cb93b6a023"
+        style="display:block;margin:0 auto;width:100%;"
+      ></vturb-smartplayer>
+
+      <script>
+        /* Player só carrega depois que a pessoa aceita o aviso +18 no quiz */
+        window.loadVSLPlayer = function(){
+          if (window.__vslLoaded) return;
+          window.__vslLoaded = true;
+          var s=document.createElement('script');
+          s.src='https://scripts.converteai.net/20a070d6-dd0d-4397-aab3-ecc0fb3a86c2/ab-test/6a6bc2544bff98cb93b6a023/player.js';
+          s.async=true;
+          try{s.fetchPriority='high';}catch(err){}
+          document.head.appendChild(s);
+        };
+      </script>
+    </div>
+
+    <div class="live-counter">
+      <div class="live-dot"></div>
+      <div class="live-text">
+        <span id="counter">285</span>
+        persone lo stanno guardando in questo momento
+      </div>
+    </div>
+
+    <div class="sound-hint">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>
+      Assicurati che l'audio sia attivato
+    </div>
+  </div>
+
+
+  <!-- =========================
+       EXIT INTENT POPUP
+  ========================== -->
+  <div
+    id="exitOfferOverlay"
+    class="exit-offer-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="exitOfferTitle"
+    aria-hidden="true"
+  >
+    <div class="exit-offer-modal">
+      <div class="exit-offer-eyebrow">Offerta riservata</div>
+
+      <h2 id="exitOfferTitle" class="exit-offer-title">
+        Stanco dei video lunghi?
+      </h2>
+
+      <p class="exit-offer-copy">
+        Se preferisci andare dritto al punto, ti lascio qui un accesso diretto
+        con uno sconto sul nostro <strong>Protocollo Maschile</strong>.
+        Vuoi approfittare di questo sconto adesso?
+      </p>
+
+      <button id="exitOfferAccept" class="exit-offer-accept" type="button">
+        SÌ, VOGLIO LO SCONTO ORA
+      </button>
+
+      <button id="exitOfferDecline" class="exit-offer-decline" type="button">
+        No, grazie. Esci dalla pagina
+      </button>
+    </div>
+  </div>
+
+
+  <footer>
+    Copyright 2025 ®<br>
+    Tutti i diritti riservati
+  </footer>
+
+  <script>
+    (function(){
+      var count=285;
+      var counterElement=document.getElementById('counter');
+
+      function updateCounter(){
+        var change=Math.floor(Math.random()*7)-3;
+        count=Math.max(240,Math.min(350,count+change));
+        if(counterElement){
+          counterElement.textContent=count;
+        }
+      }
+
+      setInterval(updateCounter,3000);
+    })();
+  </script>
+
+  <script>
+    (function(){
+      /* TROQUE SOMENTE ESTA URL PELO CHECKOUT COM DESCONTO */
+      var CHECKOUT_URL = 'https://checkout.kashpay.com.br/checkout/checkout-1790131035242';
+
+      var overlay = document.getElementById('exitOfferOverlay');
+      var acceptButton = document.getElementById('exitOfferAccept');
+      var declineButton = document.getElementById('exitOfferDecline');
+
+      var popupShown = false;
+      var allowExit = false;
+      var backTrapActive = false;
+
+      function openExitOffer(){
+        if (popupShown || allowExit || !overlay) return;
+        if (document.body.classList.contains('quiz-active')) return;
+
+        popupShown = true;
+        overlay.classList.add('is-open');
+        overlay.setAttribute('aria-hidden', 'false');
+
+        setTimeout(function(){
+          if (acceptButton) acceptButton.focus();
+        }, 50);
+      }
+
+      function leavePage(){
+        allowExit = true;
+
+        if (overlay) {
+          overlay.classList.remove('is-open');
+          overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        /* Tenta voltar para a página anterior.
+           Se a aba não tiver histórico, substitui por uma página vazia. */
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.replace('about:blank');
+        }
+      }
+
+      /* DESKTOP:
+         Gatilho conservador de intenção de saída.
+         Só dispara quando o ponteiro REALMENTE deixa a área visível
+         pelo topo da janela (em direção às abas/barra do navegador).
+         Não existe gatilho por tempo, scroll, pausa, inatividade ou movimento comum. */
+      document.documentElement.addEventListener('mouseleave', function(event){
+        if (allowExit || popupShown) return;
+
+        if (event.clientY <= 0) {
+          openExitOffer();
+        }
+      });
+
+      /* MOBILE + DESKTOP:
+         Único segundo gatilho permitido: tentativa explícita de voltar no navegador.
+         Nenhum outro comportamento da página abre a oferta. */
+      try {
+        history.pushState({ exitOfferGuard: true }, '', window.location.href);
+        backTrapActive = true;
+
+        window.addEventListener('popstate', function(){
+          if (allowExit) return;
+
+          if (backTrapActive) {
+            history.pushState({ exitOfferGuard: true }, '', window.location.href);
+            openExitOffer();
+          }
+        });
+      } catch (e) {}
+
+      /* CTA: redireciona direto para o checkout. */
+      if (acceptButton) {
+        acceptButton.addEventListener('click', function(){
+          allowExit = true;
+
+          window.location.href = CHECKOUT_URL;
+        });
+      }
+
+      /* RECUSA: realmente sai da página. */
+      if (declineButton) {
+        declineButton.addEventListener('click', leavePage);
+      }
+
+      /* ESC equivale a recusar/sair. */
+      document.addEventListener('keydown', function(event){
+        if (event.key === 'Escape' && overlay && overlay.classList.contains('is-open')) {
+          leavePage();
+        }
+      });
+    })();
+  </script>
+
+  <!-- =========================
+       QUIZ PRÉ-VSL — LÓGICA
+  ========================== -->
+  <script>
+    (function(){
+      var steps = document.querySelectorAll('#quizOverlay .quiz-step');
+      var bar = document.getElementById('quizBar');
+      var busy = false;
+
+      function go(n){
+        for (var i = 0; i < steps.length; i++) steps[i].classList.remove('is-active');
+        steps[n].classList.add('is-active');
+        bar.style.width = (n / 3 * 100) + '%';
+        document.getElementById('quizOverlay').scrollTop = 0;
+      }
+
+      [0,1,2].forEach(function(n){
+        var opts = steps[n].querySelectorAll('.quiz-opt');
+        for (var i = 0; i < opts.length; i++) {
+          opts[i].addEventListener('click', function(){
+            if (busy) return;
+            busy = true;
+            this.classList.add('is-selected');
+            setTimeout(function(){
+              busy = false;
+              if (n < 2) { go(n + 1); }
+              else {
+                go(3);
+              }
+            }, 300);
+          });
+        }
+      });
+
+      document.getElementById('quizCta').addEventListener('click', function(){
+        document.body.classList.remove('quiz-active');
+        window.scrollTo(0, 0);
+        if (window.loadVSLPlayer) window.loadVSLPlayer();
+      });
+
+      /* Maior de idade que recusa o conteúdo explícito: vai direto pro checkout (sem disparar evento) */
+      document.getElementById('quizNoExplicit').addEventListener('click', function(){
+        var url = 'https://pay.vsalestech.shop/checkout/checkout-1790310358684';
+        var qs = window.location.search;
+        if (qs) url += (url.indexOf('?') > -1 ? '&' : '?') + qs.slice(1);
+        window.location.href = url;
+      });
+
+      document.getElementById('quizUnder').addEventListener('click', function(){
+        window.location.replace('https://www.google.com');
+      });
+    })();
+  </script>
+
+</body>
+</html>
