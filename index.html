@@ -575,20 +575,16 @@
     </div>
 
     <div class="video-container">
-      <vturb-smartplayer
-        id="ab-6a6bc2544bff98cb93b6a023"
-        style="display:block;margin:0 auto;width:100%;"
-      ></vturb-smartplayer>
+      <vturb-smartplayer id="vid-6aee7043882703ca9fa702e4" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 177.77777777777777% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
 
-      <script>
+      <script type="text/javascript">
         /* Player só carrega depois que a pessoa aceita o aviso +18 no quiz */
         window.loadVSLPlayer = function(){
           if (window.__vslLoaded) return;
           window.__vslLoaded = true;
-          var s=document.createElement('script');
-          s.src='https://scripts.converteai.net/20a070d6-dd0d-4397-aab3-ecc0fb3a86c2/ab-test/6a6bc2544bff98cb93b6a023/player.js';
-          s.async=true;
-          try{s.fetchPriority='high';}catch(err){}
+          var s=document.createElement("script");
+          s.src="https://scripts.converteai.net/c042ea0d-e366-417f-b903-726dc83989c3/players/6aee7043882703ca9fa702e4/v4/player.js";
+          s.async=!0;
           document.head.appendChild(s);
         };
       </script>
