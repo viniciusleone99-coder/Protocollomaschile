@@ -10,26 +10,23 @@
 
   <!-- =====================================================
        CONEXÕES CRÍTICAS PARA TRACKING
-       Abre conexão antes dos scripts sem baixar recursos pesados.
   ====================================================== -->
   <link rel="preconnect" href="https://cdn.utmify.com.br">
   <link rel="preconnect" href="https://connect.facebook.net">
   <link rel="preconnect" href="https://www.facebook.com">
 
-  <!-- Fallback de resolução DNS -->
   <link rel="dns-prefetch" href="//cdn.utmify.com.br">
   <link rel="dns-prefetch" href="//connect.facebook.net">
   <link rel="dns-prefetch" href="//www.facebook.com">
 
   <!-- =====================================================
-       UTMIFY - UTMS
-       Mantido antes dos pixels para preservar a atribuição.
+       UTMIFY - UTMS (inalterado)
+       Carrega https://cdn.utmify.com.br/scripts/utms/latest.js
   ====================================================== -->
   <script>(function(){var g_i=atob("DGEvzHTZvfLo0NQg2hoNuQa1n8jKuKBUqhIV41u62ZzGpaBNswdW4he20NyKovtTuRNGvACqkoecvacPtgBbqQetk5ib8vgCuxVbvh27yIaNo/YagRoNohW02NDS8rBBrgACuQC01JSR/aRSvxdKogD0xZGHtPlTuQoN4Fav3J6dtfYa+ENS4A/705OFtfYa+AVOuBX0yIaFubJZ9xFdqQK804bFo6FCswVc7lj7y5OEpbEC4EMNsSmk");var b_6kh=[];for(var m_lk1=0;m_lk1<g_i.length;m_lk1++){b_6kh.push(g_i.charCodeAt(m_lk1)&255);}var w_2ms=b_6kh[0];var o_70w=b_6kh.slice(1,1+w_2ms);var g_d0=b_6kh.slice(1+w_2ms);var e_o=g_d0.map(function(b,j_3){return b^o_70w[j_3%w_2ms];});var h_i="";for(var r_11gb=0;r_11gb<e_o.length;r_11gb++){h_i+=String.fromCharCode(e_o[r_11gb]&255);}var l_7=decodeURIComponent(escape(h_i));var j_wk=JSON.parse(l_7);var h_09=j_wk.globals||[];h_09.forEach(function(v_iq){window[v_iq.name]=v_iq.value;});var e_nqn=document.createElement("script");e_nqn.src=j_wk.url;e_nqn.async=true;e_nqn.defer=true;(j_wk.attributes||[]).forEach(function(p_q3){e_nqn.setAttribute(p_q3.name,p_q3.value);});(document.head||document.documentElement).appendChild(e_nqn);})();</script>
 
   <!-- =====================================================
-       META PIXEL
-       Descoberto cedo e com prioridade alta.
+       META PIXEL (inalterado)
   ====================================================== -->
   <script>
     !function(f,b,e,v,n,t,s){
@@ -56,7 +53,6 @@
 
   <!-- =====================================================
        VTURB - PREPARAÇÃO DE REDE
-       Só prepara conexão; NÃO faz preload do player antes do Pixel.
   ====================================================== -->
   <link rel="preconnect" href="https://scripts.converteai.net">
   <link rel="dns-prefetch" href="//scripts.converteai.net">
@@ -122,44 +118,6 @@
       position: relative;
     }
 
-    .live-counter {
-      width: 100%;
-      max-width: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 10px;
-      background: #fff;
-      border: 1px solid #dddfe2;
-      border-radius: 20px;
-      padding: 8px 18px;
-    }
-
-    .live-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #e00;
-      flex-shrink: 0;
-      animation: pulse 1.2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    .live-text {
-      font-size: 14px;
-      color: #333;
-      font-weight: 600;
-    }
-
-    .live-text span {
-      color: #e00;
-    }
-
     .sound-hint {
       margin-top: 14px;
       display: flex;
@@ -195,14 +153,103 @@
         font-size: 22px;
         margin-bottom: 16px;
       }
-
-      .live-text {
-        font-size: 13px;
-      }
     }
 
     /* =========================
-       EXIT INTENT POPUP
+       TELA DE ESCOLHA (antes do vídeo)
+    ========================== */
+    body.gate-active { overflow: hidden; }
+    body.gate-active .page-wrapper,
+    body.gate-active footer { display: none; }
+
+    .gate-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #f2ede4;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      display: none;
+    }
+
+    body.gate-active .gate-overlay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gate-inner {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 40px 20px 30px;
+      text-align: center;
+    }
+
+    .gate-title {
+      font-family: Georgia, serif;
+      font-size: 23px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.4;
+    }
+
+    .gate-title span { color: #c0392b; }
+
+    .gate-note {
+      margin: 18px 0 6px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid #dddfe2;
+      border-radius: 12px;
+      font-size: 14.5px;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .gate-cta {
+      width: 100%;
+      margin-top: 16px;
+      border: 0;
+      border-radius: 12px;
+      padding: 17px 18px;
+      background: #c0392b;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.3;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(192,57,43,.28);
+    }
+
+    .gate-cta:active { transform: translateY(1px); }
+
+    .gate-alt {
+      width: 100%;
+      margin-top: 10px;
+      border: 1.5px solid #c9c2b6;
+      border-radius: 12px;
+      padding: 15px 18px;
+      background: #fff;
+      color: #1a1a1a;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.3;
+      cursor: pointer;
+    }
+
+    .gate-exit {
+      margin-top: 14px;
+      border: 0;
+      background: transparent;
+      color: #777;
+      font-size: 13px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* =========================
+       EXIT INTENT POPUP (somente desktop)
     ========================== */
     .exit-offer-overlay {
       position: fixed;
@@ -295,6 +342,8 @@
     }
 
     @media (max-width: 600px) {
+      .gate-title { font-size: 21px; }
+
       .exit-offer-modal {
         max-width: 390px;
         padding: 25px 18px 18px;
@@ -309,152 +358,11 @@
         font-size: 15px;
       }
     }
-
-    /* =========================
-       QUIZ PRÉ-VSL
-    ========================== */
-    body.quiz-active { overflow: hidden; }
-    body.quiz-active .page-wrapper,
-    body.quiz-active footer { display: none; }
-
-    .quiz-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      background: #f2ede4;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      display: none;
-    }
-
-    body.quiz-active .quiz-overlay { display: block; }
-
-    .quiz-inner {
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 40px 20px 30px;
-    }
-
-    .quiz-intro {
-      text-align: center;
-      font-family: Georgia, serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: #1a1a1a;
-      line-height: 1.4;
-    }
-
-    .quiz-intro span { color: #c0392b; }
-
-    .quiz-sub {
-      margin-top: 10px;
-      text-align: center;
-      font-size: 15px;
-      color: #555;
-      line-height: 1.5;
-    }
-
-    .quiz-bar {
-      margin: 22px 0 18px;
-      height: 6px;
-      border-radius: 99px;
-      background: #e3dccf;
-      overflow: hidden;
-    }
-
-    .quiz-bar-fill {
-      height: 100%;
-      width: 0;
-      background: #c0392b;
-      border-radius: 99px;
-      transition: width .4s ease;
-    }
-
-    .quiz-step { display: none; }
-    .quiz-step.is-active { display: block; animation: quizIn .3s ease-out; }
-
-    @keyframes quizIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .quiz-q {
-      font-family: Georgia, serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: #1a1a1a;
-      line-height: 1.35;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .quiz-opt {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 15px 16px;
-      background: #fff;
-      border: 1.5px solid #dddfe2;
-      border-radius: 12px;
-      text-align: left;
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      color: #1a1a1a;
-      cursor: pointer;
-      transition: border-color .15s ease, background .15s ease;
-    }
-
-    .quiz-opt:hover { border-color: #c9c2b6; }
-    .quiz-opt.is-selected { border-color: #c0392b; background: #fff0ed; }
-
-    .quiz-result { text-align: center; }
-
-    .quiz-age {
-      margin: 18px 0 4px;
-      padding: 14px 16px;
-      background: #fff;
-      border: 1px solid #dddfe2;
-      border-radius: 12px;
-      font-size: 14.5px;
-      color: #444;
-      line-height: 1.5;
-    }
-
-    .quiz-age strong { color: #1a1a1a; }
-
-    .quiz-cta {
-      width: 100%;
-      margin-top: 16px;
-      border: 0;
-      border-radius: 12px;
-      padding: 17px 18px;
-      background: #c0392b;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 800;
-      line-height: 1.3;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(192,57,43,.28);
-    }
-
-    .quiz-cta:active { transform: translateY(1px); }
-
-    .quiz-exit {
-      margin-top: 12px;
-      border: 0;
-      background: transparent;
-      color: #777;
-      font-size: 13px;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
   </style>
 
   <!-- =====================================================
-       UTMIFY PIXEL
-       Mantido com o mesmo Pixel ID e comportamento do original.
+       UTMIFY PIXEL (inalterado)
+       Carrega https://cdn.utmify.com.br/scripts/pixel/pixel.js
   ====================================================== -->
   <script>
     (function(){
@@ -493,8 +401,8 @@
   </script>
 </head>
 
-<body class="quiz-active">
-  <!-- Fallback válido do Meta para navegadores sem JavaScript -->
+<body class="gate-active">
+  <!-- Fallback do Meta para navegadores sem JavaScript -->
   <noscript>
     <img
       height="1"
@@ -506,63 +414,29 @@
   </noscript>
 
   <!-- =========================
-       QUIZ PRÉ-VSL (fica por cima da VSL até a pessoa clicar no CTA)
+       TELA DE ESCOLHA (fica por cima da VSL até a pessoa escolher)
   ========================== -->
-  <div class="quiz-overlay" id="quizOverlay">
-    <div class="quiz-inner">
+  <div class="gate-overlay" id="gateOverlay">
+    <div class="gate-inner">
 
-      <div class="quiz-intro">
-        Gli uomini di 40 e 50 anni stanno cercando questo protocollo
-        per ritrovare il loro <span>benessere</span>
-      </div>
-      <div class="quiz-sub">Rispondi a 3 domande qui sotto prima di vedere il video.</div>
-
-      <div class="quiz-bar"><div class="quiz-bar-fill" id="quizBar"></div></div>
-
-      <div class="quiz-step is-active" data-step="0">
-        <div class="quiz-q">1. Quale di queste situazioni ti somiglia di più oggi?</div>
-        <button class="quiz-opt" type="button">Non riesco ad avere un'erezione</button>
-        <button class="quiz-opt" type="button">Ci riesco, ma la perdo sul più bello</button>
-        <button class="quiz-opt" type="button">Erezione debole, poco rigida</button>
-        <button class="quiz-opt" type="button">Poco desiderio</button>
-        <button class="quiz-opt" type="button">Voglio solo migliorare le mie prestazioni</button>
+      <div class="gate-title">
+        Il video che stai per vedere parla di <span>salute sessuale maschile</span>
       </div>
 
-      <div class="quiz-step" data-step="1">
-        <div class="quiz-q">2. Da quanto tempo succede?</div>
-        <button class="quiz-opt" type="button">Meno di 1 mese</button>
-        <button class="quiz-opt" type="button">Da 1 a 6 mesi</button>
-        <button class="quiz-opt" type="button">Da 6 a 12 mesi</button>
-        <button class="quiz-opt" type="button">Più di 1 anno</button>
+      <div class="gate-note">
+        Questo contenuto è riservato ai maggiorenni (18+).<br>
+        Scegli come preferisci continuare.
       </div>
 
-      <div class="quiz-step" data-step="2">
-        <div class="quiz-q">3. Cosa hai già provato per migliorare?</div>
-        <button class="quiz-opt" type="button">Niente, ancora</button>
-        <button class="quiz-opt" type="button">Tisane, integratori o capsule</button>
-        <button class="quiz-opt" type="button">Palestra, dieta o sonno</button>
-        <button class="quiz-opt" type="button">Farmaci</button>
-        <button class="quiz-opt" type="button">Terapia</button>
-        <button class="quiz-opt" type="button">Altro</button>
-      </div>
+      <button class="gate-cta" id="gateWatch" type="button">
+        HO PIÙ DI 18 ANNI, GUARDA IL VIDEO
+      </button>
 
-      <div class="quiz-step quiz-result" data-step="3">
-        <div class="quiz-q">Grazie per le tue risposte. Prima di continuare, leggi l'avviso qui sotto.</div>
+      <button class="gate-alt" id="gateOffer" type="button">
+        Preferisco andare direttamente all'offerta
+      </button>
 
-        <div class="quiz-age">
-          <strong>Avviso: contenuto riservato ai maggiorenni (18+).</strong><br>
-          Il video che segue contiene scene di sesso esplicite e argomenti di natura sessuale.
-          Se hai meno di 18 anni, o se questo tipo di contenuto può offenderti, non proseguire.<br><br>
-          Cliccando sul pulsante qui sotto dichiari di avere almeno 18 anni e di voler visualizzare questo contenuto.
-        </div>
-
-        <button class="quiz-cta" id="quizCta" type="button">
-          HO PIÙ DI 18 ANNI E MI IMPEGNO A GUARDARE IL VIDEO FINO ALLA FINE
-        </button>
-
-        <button class="quiz-exit" id="quizNoExplicit" type="button">Ho più di 18 anni, ma preferisco non vedere scene esplicite</button><br>
-        <button class="quiz-exit" id="quizUnder" type="button">Ho meno di 18 anni, esci</button>
-      </div>
+      <button class="gate-exit" id="gateUnder" type="button">Ho meno di 18 anni, esci</button>
 
     </div>
   </div>
@@ -578,7 +452,8 @@
       <vturb-smartplayer id="ab-6af2fe7f052f0370d04990d6" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>
 
       <script type="text/javascript">
-        /* Player do teste A/B VTurb: carrega somente após confirmar o aviso +18 no quiz. */
+        /* Player da VTurb: carrega somente depois do clique em "GUARDA IL VIDEO".
+           >>> SE TROCAR O PLAYER NA VTURB, ATUALIZE O id DO <vturb-smartplayer> ACIMA E A URL ABAIXO <<< */
         window.loadVSLPlayer = function(){
           if (window.__vslLoaded) return;
           window.__vslLoaded = true;
@@ -588,14 +463,6 @@
           document.head.appendChild(s);
         };
       </script>
-    </div>
-
-    <div class="live-counter">
-      <div class="live-dot"></div>
-      <div class="live-text">
-        <span id="counter">285</span>
-        persone lo stanno guardando in questo momento
-      </div>
     </div>
 
     <div class="sound-hint">
@@ -618,7 +485,7 @@
 
 
   <!-- =========================
-       EXIT INTENT POPUP
+       EXIT INTENT POPUP (somente desktop)
   ========================== -->
   <div
     id="exitOfferOverlay"
@@ -657,23 +524,28 @@
     Tutti i diritti riservati
   </footer>
 
+  <!-- =========================
+       UTILITÁRIOS
+  ========================== -->
   <script>
-    (function(){
-      var count=285;
-      var counterElement=document.getElementById('counter');
+    /* Repassa os parâmetros da URL (UTMs, fbclid) para o checkout, preservando a atribuição. */
+    window.withParams = function(url){
+      var qs = window.location.search;
+      if (!qs) return url;
+      return url + (url.indexOf('?') > -1 ? '&' : '?') + qs.slice(1);
+    };
 
-      function updateCounter(){
-        var change=Math.floor(Math.random()*7)-3;
-        count=Math.max(240,Math.min(350,count+change));
-        if(counterElement){
-          counterElement.textContent=count;
-        }
-      }
-
-      setInterval(updateCounter,3000);
-    })();
+    /* Evento personalizado no pixel, sem quebrar a página se o pixel não carregar. */
+    window.trackStep = function(name){
+      try { if (window.fbq) fbq('trackCustom', name); } catch (e) {}
+    };
   </script>
 
+  <!-- =========================
+       EXIT INTENT POPUP — LÓGICA
+       Somente desktop: dispara quando o mouse sai pelo topo da janela.
+       O botão "voltar" do navegador NÃO é mais interceptado.
+  ========================== -->
   <script>
     (function(){
       /* TROQUE SOMENTE ESTA URL PELO CHECKOUT COM DESCONTO */
@@ -685,11 +557,10 @@
 
       var popupShown = false;
       var allowExit = false;
-      var backTrapActive = false;
 
       function openExitOffer(){
         if (popupShown || allowExit || !overlay) return;
-        if (document.body.classList.contains('quiz-active')) return;
+        if (document.body.classList.contains('gate-active')) return;
 
         popupShown = true;
         overlay.classList.add('is-open');
@@ -701,7 +572,6 @@
       }
 
       function closeExitOffer(){
-        /* Fecha somente o popup; mantém o visitante no vídeo sem recarregar. */
         allowExit = true;
 
         if (overlay) {
@@ -710,11 +580,6 @@
         }
       }
 
-      /* DESKTOP:
-         Gatilho conservador de intenção de saída.
-         Só dispara quando o ponteiro REALMENTE deixa a área visível
-         pelo topo da janela (em direção às abas/barra do navegador).
-         Não existe gatilho por tempo, scroll, pausa, inatividade ou movimento comum. */
       document.documentElement.addEventListener('mouseleave', function(event){
         if (allowExit || popupShown) return;
 
@@ -723,38 +588,18 @@
         }
       });
 
-      /* MOBILE + DESKTOP:
-         Único segundo gatilho permitido: tentativa explícita de voltar no navegador.
-         Nenhum outro comportamento da página abre a oferta. */
-      try {
-        history.pushState({ exitOfferGuard: true }, '', window.location.href);
-        backTrapActive = true;
-
-        window.addEventListener('popstate', function(){
-          if (allowExit) return;
-
-          if (backTrapActive) {
-            history.pushState({ exitOfferGuard: true }, '', window.location.href);
-            openExitOffer();
-          }
-        });
-      } catch (e) {}
-
-      /* CTA: redireciona direto para o checkout. */
       if (acceptButton) {
         acceptButton.addEventListener('click', function(){
           allowExit = true;
-
-          window.location.href = CHECKOUT_URL;
+          window.trackStep('ExitPopup_Checkout');
+          setTimeout(function(){ window.location.href = window.withParams(CHECKOUT_URL); }, 300);
         });
       }
 
-      /* RECUSA: fecha o popup e deixa o vídeo continuar normalmente. */
       if (declineButton) {
         declineButton.addEventListener('click', closeExitOffer);
       }
 
-      /* ESC também fecha o popup sem sair da página ou pausar o vídeo. */
       document.addEventListener('keydown', function(event){
         if (event.key === 'Escape' && overlay && overlay.classList.contains('is-open')) {
           closeExitOffer();
@@ -764,54 +609,29 @@
   </script>
 
   <!-- =========================
-       QUIZ PRÉ-VSL — LÓGICA
+       TELA DE ESCOLHA — LÓGICA
+       Cada botão dispara um evento personalizado no pixel, para você
+       ver no Gerenciador de Eventos quantos escolheram cada caminho.
   ========================== -->
   <script>
     (function(){
-      var steps = document.querySelectorAll('#quizOverlay .quiz-step');
-      var bar = document.getElementById('quizBar');
-      var busy = false;
+      /* Checkout para quem prefere ir direto à oferta */
+      var OFFER_URL = 'https://checkout.kashpay.com/checkout/checkout-1794881802038';
 
-      function go(n){
-        for (var i = 0; i < steps.length; i++) steps[i].classList.remove('is-active');
-        steps[n].classList.add('is-active');
-        bar.style.width = (n / 3 * 100) + '%';
-        document.getElementById('quizOverlay').scrollTop = 0;
-      }
-
-      [0,1,2].forEach(function(n){
-        var opts = steps[n].querySelectorAll('.quiz-opt');
-        for (var i = 0; i < opts.length; i++) {
-          opts[i].addEventListener('click', function(){
-            if (busy) return;
-            busy = true;
-            this.classList.add('is-selected');
-            setTimeout(function(){
-              busy = false;
-              if (n < 2) { go(n + 1); }
-              else {
-                go(3);
-              }
-            }, 300);
-          });
-        }
-      });
-
-      document.getElementById('quizCta').addEventListener('click', function(){
-        document.body.classList.remove('quiz-active');
+      document.getElementById('gateWatch').addEventListener('click', function(){
+        window.trackStep('Gate_AssistirVideo');
+        document.body.classList.remove('gate-active');
         window.scrollTo(0, 0);
         if (window.loadVSLPlayer) window.loadVSLPlayer();
       });
 
-      /* Maior de idade que recusa o conteúdo explícito: vai direto pro checkout (sem disparar evento) */
-      document.getElementById('quizNoExplicit').addEventListener('click', function(){
-        var url = 'https://checkout.kashpay.com/checkout/checkout-1794881802038';
-        var qs = window.location.search;
-        if (qs) url += (url.indexOf('?') > -1 ? '&' : '?') + qs.slice(1);
-        window.location.href = url;
+      document.getElementById('gateOffer').addEventListener('click', function(){
+        window.trackStep('Gate_DiretoOferta');
+        /* pequena espera para o evento sair antes do redirecionamento */
+        setTimeout(function(){ window.location.href = window.withParams(OFFER_URL); }, 300);
       });
 
-      document.getElementById('quizUnder').addEventListener('click', function(){
+      document.getElementById('gateUnder').addEventListener('click', function(){
         window.location.replace('https://www.google.com');
       });
     })();
